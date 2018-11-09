@@ -1,0 +1,3 @@
+o:	Game:@playero:Player:
+@nameI"Player 1:ET:@optioni:@letterI"A;	T:@hangmano:Hangman	;I"Computer;	T:
+@wordI"HOMEOWNER;	T:@blank_letters[I" _ ;	TI"O;	T@I"E;	T@@@@@:@misses[@:@new_or_savedi

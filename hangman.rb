@@ -1,28 +1,5 @@
-dictionary = File.read("dictionary.txt")
-dictionary = dictionary.split
-
-class Game 
-    def initialize(dictionary)
-      @player = Player.new("Player 1")
-      @hangman = Hangman.new("Computer", dictionary)
-    end
-
-    def play 
-      puts "#{@hangman.name} has chose a secret word. Can you guess it?"
-      puts
-      @hangman.display_correct
-      loop do 
-        @player.guess_letter
-        @hangman.is_letter_included?(@player.letter)
-        @hangman.display_correct
-        @hangman.display_miss
-        break if @hangman.game_over?
-      end
-    end
-end
-
 class Hangman
-  attr_accessor :name
+  attr_accessor :name, :misses
 
   def initialize(name, dictionary)
     @name = name
@@ -61,7 +38,7 @@ class Hangman
   end
 
   def display_miss
-    p "Misses:"
+    puts "Misses:"
     p @misses
   end
 
@@ -76,7 +53,6 @@ class Hangman
   end
 
   def winner
-    puts "got to winner"
     if @blank_letters.join == @word
         puts "You guessed the word! You win!"
         true
@@ -86,9 +62,9 @@ class Hangman
   end
 
   def loser
-    puts "got to loser"
     if @misses.length == 6
         puts "HANGMAN! You lose!"
+        puts "The secret word was #{@word}"
         true
     else
         false
@@ -97,18 +73,4 @@ class Hangman
 end
 
 
-class Player
-  attr_accessor :letter
 
-    def initialize(name)
-        @name = name
-    end
-
-    def guess_letter
-        puts "Enter your guess:"
-        @letter = gets.chomp.upcase
-    end
-end
-
-game = Game.new(dictionary)
-game.play
